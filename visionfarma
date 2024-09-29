@@ -1,0 +1,240 @@
+CREATE TABLE Cliente (
+    idCliente INT PRIMARY KEY,
+    NomeCliente VARCHAR(50) NOT NULL,
+    CPF INT NOT NULL,
+    TelefoneCliente VARCHAR(50) NOT null,
+    Idade INT	not null
+) ENGINE=InnoDB;
+
+create table Produto (
+    idProduto INT primary key,
+    NomeRemedio VARCHAR (50) not null,
+    validade datetime not null,
+    lote varchar (11) not null,
+    idFabricante int not null,
+FOREIGN KEY (idFabricante) REFERENCES Fabricante(idFabricante) ON DELETE CASCADE
+) engine=InnoDB;
+
+CREATE TABLE Fabricante (
+    idFabricante INT PRIMARY KEY,
+    CNPJ varchar (14) unique NOT NULL,
+    Pais VARCHAR (50) NOT NULL,
+  	ESTADO VARCHAR (50) NOT NULL,
+  	NomeFabricante VARCHAR (50) not null
+) ENGINE=InnoDB;
+
+select * from cliente c
+
+insert into Cliente (NomeCliente, CPF, TelefoneCliente, Idade) Values ('Leonardo Xavier Santos', 7014030283, '34998820074', 21)
+
+insert into Cliente (NomeCliente, CPF, TelefoneCliente, Idade) Values ('Augusto Sleiman Ferreira Khatib', 02246689301, '11929572167', 26)
+
+insert into Cliente (NomeCliente, CPF, TelefoneCliente, Idade) Values ('João Silva', 12345678900, '11912345678', 30)
+
+insert into Cliente (NomeCliente, CPF, TelefoneCliente, Idade) Values ('Laura Almeida', 67890123405, '61967890123', 29)
+
+insert into Cliente (NomeCliente, CPF, TelefoneCliente, Idade) Values ('Fernanda Rocha', 89012345607, '81989012345', 27)
+
+insert into Cliente (NomeCliente, CPF, TelefoneCliente, Idade) Values ('Leonardo Xavier Santos', 7014030283, '34998820074', 21)
+
+-- se tiver muitos dados para serem inseridos, utilizar esse script
+INSERT INTO Cliente (NomeCliente, CPF, TelefoneCliente, Idade) 
+select 'Pedro Santos', 34567890102, '31934567890', 28 from dual union all
+select 'Patrícia Mendes', 01234567809, '01911234567', 32 from dual;
+
+select * from Produto
+
+insert into Produto (idProduto, NomeRemedio, validade, lote, idFabricante) values (1, 'Paracetamol', '2025-10-15', 'L001PA500', 1)
+
+select * from fabricante f
+
+insert into fabricante (idFabricante, CNPJ, Pais, ESTADO, NomeFabricante) Values (1, 7014030283, 'Brasil', 'São Paulo', 'Farmácia Genérica S.A.')
+
+
+-- traz os dados de duas tabelas relacionais (que estão relacionadas)
+select * from produto p join fabricante f on p.idFabricante = 1
+
+-- traz dados selecionados (nesse caso traz o cnpj)
+select p.*, f.CNPJ
+from produto p 
+join fabricante f on p.idProduto = f.idFabricante
+
+-- atualiza dados inseridos na tabela
+update Cliente c set c.TelefoneCliente = '34998820074' where c.NomeCliente = 'Leonardo Xavier Santos'
+
+-- anterou a tabela de int para bigint
+alter table Cliente modify column CPF bigint;
+
+-- pesquisa de cpf (dados) dentro da tabela Cliente
+select * from cliente c where CPF in (02246689301, 7014030283)
+
+-- se tiver muitos dados para serem inseridos, utilizar esse script
+INSERT INTO cliente (NomeCliente, CPF, TelefoneCliente, Idade)
+select 'Luna das Neves', 97106538221,'+55 21 2512 0714',61 from dual union all
+select 'Giovanna Correia', 48123096704,'+55 21 9825 8444',61 from dual union all
+select 'Ryan Porto',81965032702,'+55 21 46258520',31 from dual union all
+select 'Fernando Fernandes',39018245615,'+55 81 3244 7676',40 from dual union all
+select 'João da Mata',62491578085,'21 9368 7410',25 from dual union all
+select 'Gabriel Gonçalves',30291748678,'61 4612 4898',26 from dual union all
+select 'Dr Vitor Pires',67893405210,'(011) 78772727',24 from dual union all
+select 'Luiza da Rocha',79310845279,'+55 21 76342396',50 from dual union all
+select 'Sr Fernando Freitas',17856039493,'0300 757 0922',53 from dual union all
+select 'Laís Nascimento',34675901280,'31 10418713',67 from dual union all
+select 'Luiz Otávio Nascimento',32160758930,'+55 (041) 13723776',37 from dual union all
+select 'Maria da Costa',63172490831,'0900 268 4578',30 from dual union all
+select 'Vitor Gabriel Nascimento',85203179441,'(081) 8289 8398',35 from dual union all
+select 'Kaique Correia',38265410905,'11 1805 9796',63 from dual union all
+select 'Mariana Farias',86502913768,'+55 81 03274177',35 from dual union all
+select 'Noah Rodrigues',54712983655,'(051) 75748320',48 from dual union all
+select 'Alana da Cruz',65304927800,'+55 51 1785 5731',51 from dual union all
+select 'Francisco Moura',30567489256,'(071) 60419072',37 from dual union all
+select 'João Pedro Barbosa',48932650160,'81 5384 7565',37 from dual union all
+select 'Alexia Pereira',46730815280,'+55 (011) 69312765',56 from dual union all
+select 'Fernando da Rosa',08519743250,'21 8588 6054',68 from dual union all
+select 'Valentina Viana',58704923197,'+55 21 5206 0000',33 from dual union all
+select 'Guilherme Dias',04526198749,'81 8000 9365',42 from dual union all
+select 'Fernando da Luz',06492871502,'+55 71 51042757',39 from dual union all
+select 'Ana Julia Costela',61705394299,'09000381592',70 from dual union all
+select 'Carolina Gomes',41329076869,'+55 41 3480 9982',29 from dual union all
+select 'Letícia Martins',28104679511,'+55 11 84666287',27 from dual union all
+select 'Amanda Teixeira',89305712630,'(041) 86802131',57 from dual union all
+select 'Catarina Moraes',84379615057,'31 49403850',68 from dual union all
+select 'Augusto Lopes',38716420535,'+55 81 5146 0485',68 from dual union all
+select 'Luna da Cruz',64512083707,'(081) 92827413',41 from dual union all
+select 'Renan Pires',97651428030,'(011) 76469748',37 from dual union all
+select 'Srta Alícia Carvalho',51824670362,'(041) 0569 1135',32 from dual union all
+select 'Emanuella Azevedo',83927451088,'41 2236 9752',63 from dual union all
+select 'Dr Isaac Martins',86924035124,'(041) 9334 8386',36 from dual union all
+select 'Maria Nascimento',49805263738,'81 96819522',46 from dual union all
+select 'Dr Ryan Cardoso',97041832678,'+55 51 3649 9111',60 from dual union all
+select 'Ana Carolina Rodrigues',82063417571,'+55 (061) 2009 1651',46 from dual union all
+select 'Maria Vitória da Cruz',16387954282,'0900 810 5418',51 from dual union all
+select 'Davi Lucas Ramos',52179638400,'31 30477462',59 from dual union all
+select 'Fernanda Nogueira',46731825964,'(081) 14309971',42 from dual union all
+select 'Alana Fernandes',71350869295,'+55 (041) 66862732',43 from dual union all
+select 'Srta Ana Sophia da Conceição',17342560952,'81 1603 3242',58 from dual union all
+select 'Henrique Cardoso',82631974573,'(041) 7892 4474',31 from dual union all
+select 'Luana da Mata',04253817904,'+55 (061) 4322 7773',43 from dual union all
+select 'Sr Felipe Viana',43296571043,'+55 (031) 66150531',45 from dual union all
+select 'Ana Carolina da Mota',95064132824,'(011) 28933521',55 from dual union all
+select 'Danilo Costa',80645923133,'+55 21 8967 5701',28 from dual union all
+select 'Srta Maria Eduarda Alves',09468257347,'31 87219357',54 from dual union all
+select 'João Nascimento',43562180942,'+55 41 22097929',58 from dual union all
+select 'Valentina da Paz',38697401593,'+55 (011) 1687 2457',66 from dual union all
+select 'Srta Júlia Silva',36715428964,'(011) 1121 5772',50 from dual union all
+select 'Maria Alice Moura',29601743561,'(051) 0411 5375',58 from dual union all
+select 'Bruna Aragão',75864093157,'+55 (021) 94516034',62 from dual union all
+select 'Maria Luiza Castro',65310874984,'84 50972683',19 from dual union all
+select 'Dra Lara Fogaça',16483502753,'08000168608',47 from dual union all
+select 'Ana Caldeira',59168023405,'(021) 8897 3091',22 from dual union all
+select 'Cecília Pires',75193862446,'0300 899 0866',52 from dual union all
+select 'Milena Fernandes',14539687093,'(041) 87078627',60 from dual union all
+select 'João Felipe Silva',53976280429,'+55 (041) 24656087',21 from dual union all
+select 'Nina Cavalcanti',20483751979,'0800 289 9060',55 from dual union all
+select 'Laura Santos',51072864371,'+55 11 63657265',58 from dual union all
+select 'Ana Rodrigues',38945271023,'08003208716',43 from dual union all
+select 'Amanda Nunes',36842715008,'(031) 0226 5251',46 from dual union all
+select 'Caio Nogueira',04315692824,'+55 (011) 17677334',19 from dual union all
+select 'Alexia Teixeira',49726150876,'+55 41 9954 0176',37 from dual union all
+select 'Heloísa Peixoto',79280614576,'(021) 54576948',22 from dual union all
+select 'Yago Carvalho',09476285338,'+55 51 3558 5080',51 from dual union all
+select 'Sra Stephany Farias',83261509759,'61 96870448',57 from dual union all
+select 'Srta Maria Julia Vieira',24509378629,'51 9718 7410',43 from dual union all
+select 'Sr Luiz Henrique Moreira',71896430287,'71 8336 4098',32 from dual union all
+select 'Diogo Barbosa',89150264389,'31 1880 7627',52 from dual union all
+select 'Daniela da Rosa',59873240179,'71 2918 7354',34 from dual union all
+select 'Milena Ramos',84253967000,'(021) 2034 4620',31 from dual union all
+select 'Caroline Novaes',50426189370,'21 31357210',64 from dual union all
+select 'Bruna Ribeiro',32067451871,'+55 41 0214 5702',25 from dual union all
+select 'Brenda da Cruz',62531084924,'(021) 13104615',22 from dual union all
+select 'João Gabriel Cavalcanti',34781920640,'11 8982 3779',68 from dual union all
+select 'Luigi Araújo',63514927006,'41 3354 7459',36 from dual union all
+select 'Brenda Caldeira',86079123487,'+55 (031) 4471 6097',33 from dual union all
+select 'Marcelo da Luz',26395074199,'+55 21 0851 7684',32 from dual union all
+select 'Dra Lavínia Barbosa',02835694170,'21 5393 1003',18 from dual union all
+select 'Thales Souza',86375920400,'+55 (061) 4180 2387',37 from dual union all
+select 'Luiz Gustavo Martins',70652413943,'(011) 2750 8825',48 from dual union all
+select 'Alice Castro',65813492089,'+55 21 09484565',55 from dual union all
+select 'Sr Isaac Cardoso',50649718267,'+55 (021) 6016 2549',46 from dual union all
+select 'Emanuel Almeida',32608495729,'+55 71 7536 2529',49 from dual union all
+select 'Erick Mendes',91042576858,'+55 (061) 37148118',68 from dual union all
+select 'Sr Paulo Ramos',80216957494,'+55 31 64234563',34 from dual union all
+select 'Gabrielly Gomes',92103846524,'11 63313162',25 from dual union all
+select 'Pedro Miguel Barbosa',58470163957,'41 99402891',62 from dual union all
+select 'Marina Melo',49035678184,'41 92897132',65 from dual union all
+select 'Bryan Monteiro',68510374910,'11 8086 6233',48 from dual union all
+select 'Gabrielly Freitas',08749635247,'(061) 9213 2549',30 from dual union all
+select 'Benício Viana',19783620487,'61 11175663',47 from dual union all
+select 'Kamilly Cardoso',46912075894,'51 7444 5326',30 from dual union all
+select 'Paulo Caldeira',84705391241,'61 38467437',26 from dual union all
+select 'Sr Miguel Sales',12743850914,'+55 (051) 83448412',68 from dual union all
+select 'Emanuel Barros',83619257086,'+55 (051) 3701 1524',38 from dual;
+
+INSERT INTO fabricante (idfabricante, CNPJ, Pais, Estado, NomeFabricante)
+select 2, '12345678000199', 'Brasil', 'São Paulo', 'Farmácia Genérica SA' from dual union all
+select 3, '98765432000188', 'Brasil', 'Rio de Janeiro', 'Laboratório Saúde Viva' from dual union all
+select 4, '11223344000177', 'Brasil', 'Minas Gerais', 'BioFarma Ltda' from dual union all
+select 5, '22334556000166', 'Brasil', 'Paraná', 'PharmaPlus Indústria Farmacêutica' from dual union all
+select 6, '33445667000155', 'Brasil', 'Santa Catarina', 'SaúdeTotal Laboratórios' from dual union all
+select 7, '44556778000144', 'Brasil', 'Bahia', 'Glória Medicamentos' from dual union all
+select 8, '55667889000133', 'Brasil', 'Pernambuco', 'Laboratório VidaFarma' from dual union all
+select 9, '66778990000122', 'Brasil', 'Rio Grande do Sul', 'Remédios Alfa' from dual union all
+select 10, '77889001000111', 'Brasil', 'Ceará', 'PharmaVida Ltda' from dual union all
+select 11, '88990112000109', 'Brasil', 'Goiás', 'Saúde Sempre' from dual union all
+select 12, '99001223000108', 'Brasil', 'Distrito Federal', 'Laboratório BioFarm' from dual union all
+select 13, '12113224000107', 'Brasil', 'Pará', 'Medicamentos XYZ' from dual union all
+select 14, '23224335000106', 'Brasil', 'Amazonas', 'FarmaSegura' from dual union all
+select 15, '34335446000105', 'Brasil', 'Paraíba', 'LabPharma Saúde' from dual union all
+select 16, '45446557000104', 'Brasil', 'Mato Grosso', 'Medicinal Farma' from dual union all
+select 17, '56557668000103', 'Brasil', 'Rondônia', 'FarmaNature' from dual union all
+select 18, '67668779000102', 'Brasil', 'Maranhão', 'Laboratório Confiar' from dual union all
+select 19, '78779880000101', 'Brasil', 'Piauí', 'Viva Bem Indústria' from dual union all
+select 20, '89880991000100', 'Brasil', 'Espírito Santo', 'FarmaCura' from dual union all
+select 21, '90991102000109', 'Brasil', 'Alagoas', 'Saúde Total' from dual union all
+select 22, '12345210000108', 'Brasil', 'Sergipe', 'Vida e Saúde Ltda' from dual union all
+select 23, '23456321000107', 'Brasil', 'Tocantins', 'BioSaúde Indústria' from dual union all
+select 24, '34567432000106', 'Brasil', 'Mato Grosso do Sul', 'PharmaPlus Global' from dual union all
+select 25, '45678543000105', 'Brasil', 'Acre', 'Remédios Globo' from dual union all
+select 26, '56789654000104', 'Brasil', 'Roraima', 'Laboratórios União' from dual union all
+select 27, '67890765000103', 'Brasil', 'Amapá', 'BeneFarma' from dual union all
+select 28, '78901876000102', 'Brasil', 'Rio Grande do Norte', 'Saúde Forte' from dual union all
+select 29, '89012987000101', 'Brasil', 'Pernambuco', 'MedFarma' from dual union all
+select 30, '90123098000109', 'Brasil', 'São Paulo', 'PharmaGenética' from dual union all
+select 31, '12234109000108', 'Brasil', 'Santa Catarina', 'Saúde Integral' from dual;
+
+-- atualiza a inforção da tabela e coluna selecionada *NUNCA DE UPDATE SEM WHERER*
+update fabricante f set f.CNPJ = 12345678000288 where f.idFabricante = 1
+
+INSERT INTO produto (NomeRemedio, validade, lote, idFabricante)
+select 'Amoxicilina 500mg', '2024-05-30', 'L002AM500', 2 from dual union all
+select 'Ibuprofeno 400mg', '2023-12-20', 'L003IB400', 3 from dual union all
+select 'Loratadina 10mg', '2026-03-05', 'L004LO010', 4 from dual union all
+select 'Omeprazol 20mg', '2025-08-25', 'L005OM020', 5 from dual union all
+select 'Metformina 850mg', '2024-01-10', 'L006ME850', 6 from dual union all
+select 'Dipirona Sódica 500mg/ml', '2024-07-18', 'L007DI500', 7 from dual union all
+select 'Aspirina 100mg', '2024-11-10', 'L008AS100', 8 from dual union all
+select 'Cetirizina 10mg', '2025-08-15', 'L009CE010', 9 from dual union all
+select 'Losartana 50mg', '2024-12-20', 'L010LO050', 10 from dual union all
+select 'Captopril 25mg', '2025-01-05', 'L011CA025', 11 from dual union all
+select 'Levotiroxina 50mcg', '2026-02-25', 'L012LE050', 12 from dual union all
+select 'Sinvastatina 20mg', '2024-09-30', 'L013SI020', 13 from dual union all
+select 'Azitromicina 500mg', '2025-06-12', 'L014AZ500', 14 from dual union all
+select 'Atenolol 50mg', '2026-04-03', 'L015AT050', 15 from dual union all
+select 'Hidroclorotiazida 25mg', '2025-07-28', 'L016HC025', 16 from dual union all
+select 'Ranitidina 150mg', '2024-11-19', 'L017RA150', 17 from dual union all
+select 'Bromoprida 10mg', '2025-05-05', 'L018BR010', 18 from dual union all
+select 'Clonazepam 2mg', '2026-02-13', 'L019CL002', 19 from dual union all
+select 'Diazepam 5mg', '2024-09-22', 'L020DI005', 20 from dual union all
+select 'Fluoxetina 20mg', '2025-07-18', 'L021FL020', 21 from dual union all
+select 'Cetoprofeno 150mg', '2025-12-09', 'L022CE150', 22 from dual union all
+select 'Escitalopram 10mg', '2026-04-04', 'L023ES010', 23 from dual union all
+select 'Nimesulida 100mg', '2024-10-14', 'L024NI100', 24 from dual union all
+select 'Prednisona 20mg', '2025-11-08', 'L025PR020', 25 from dual union all
+select 'Enalapril 10mg', '2024-05-23', 'L026EN010', 26 from dual union all
+select 'Lisinopril 10mg', '2025-06-16', 'L027LI010', 27 from dual union all
+select 'Glimepirida 4mg', '2025-09-11', 'L028GL004', 28 from dual union all
+select 'Diclofenaco Sódico 50mg', '2026-01-29', 'L029DI050', 29 from dual union all
+select 'Clopidogrel 75mg', '2024-08-07', 'L030CL075', 30 from dual union all
+select 'Aldactone 25mg', '2025-03-30', 'L031AL025', 31 from dual;
+
+alter table produto modify idProduto int auto_increment;
